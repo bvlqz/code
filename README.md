@@ -1,1 +1,2 @@
-# Coding for fun and glory
+# Code
+Coding for fun and glory
