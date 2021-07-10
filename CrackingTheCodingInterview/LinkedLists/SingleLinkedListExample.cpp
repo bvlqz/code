@@ -18,6 +18,9 @@ public:
         nodeData = data;
         nextNodePtr = nullptr;
     }
+    ~Node(){
+        if (this->nextNodePtr != nullptr) delete this->nextNodePtr;
+    }
     void printAllNodes()
     {
         Node* currentWorkingNode = this;
@@ -45,13 +48,15 @@ public:
 int main()
 {
     std::cout << "Linked List Example" << std::endl;
-    Node* InitialNode = new Node(4);
     
-    InitialNode->AppendToTail(12);
+    Node* InitialNode = new Node(0);
+    
+    InitialNode->AppendToTail(1);
     InitialNode->AppendToTail(2);
-    InitialNode->AppendToTail(214);
+    InitialNode->AppendToTail(3);
+    InitialNode->AppendToTail(4);
+    InitialNode->AppendToTail(5);
     
     InitialNode->printAllNodes();
-    
     delete InitialNode;
 }
