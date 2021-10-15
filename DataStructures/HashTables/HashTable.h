@@ -4,22 +4,33 @@
 class HashNode {
     HashNode* nextNodePtr;
     std::string nodeKey;
-    int nodeValue;
+    std::string nodeValue;
 
 public:
-    HashNode(std::string key, int value)
+    HashNode(std::string key, std::string value)
     {
         nodeKey = key;
         nodeValue = value;
         nextNodePtr = nullptr;
     }
-    ~HashNode(){
+    ~HashNode()
+    {
         if (this->nextNodePtr != nullptr) delete this->nextNodePtr;
     }
-    int getNodeValue() {
+    std::string getNodeValue()
+    {
         return nodeValue;
     }
-    void AppendToTail(const char* key, int value)
+    std::string getNodeValueWithKey(std::string key)
+    {
+        if (this->nodeKey == key) {
+            return this->nodeValue;
+        }
+        else {
+            this->nextNodePtr->getNodeValueWithKey(key);
+        }
+    }
+    void AppendToTail(std::string key, std::string value)
     {
         HashNode* newEndNode = new HashNode(key, value);
         HashNode* currentWorkingNode = this;
@@ -33,25 +44,34 @@ public:
 
 class HashTable {
 public:
-    HashTable(int size) {
+    HashTable(int size)
+    {
         tableSize = size;
-        list = new HashNode *[size];
+        list = new HashNode*[size];
     }
     
-    void add(std::string k, int v) {
-        std::cout << hash(k) << std::endl;
-        list[hash(k)] = new HashNode(k, v);
+    void add(std::string k, std::string v)
+    {
+        if (list[hash(k)] != nullptr) {
+            std::cout << "Key " << k << " exists" << std::endl;
+            list[hash(k)] = new HashNode(k, v);
+        } else {
+            list[hash(k)]->AppendToTail(k, v);
+        }
+        
     }
     
-    int get(std::string k) {
-        return list[hash(k)]->getNodeValue();
+    std::string get(std::string k)
+    {
+        return list[hash(k)]->getNodeValueWithKey(k);
     }
     
 private:
     int hash(std::string key)
     {
         int keyASCIISum = 0;
-        for (int i = 0; i < key.length(); i++){
+        for (int i = 0; i < key.length(); i++)
+        {
             keyASCIISum += key[i] + 1;
         }
         return keyASCIISum % tableSize;
@@ -62,15 +82,3 @@ private:
     int itemCount;
 };
 
-int main()
-{
-    std::cout << "Hash Table Example" << std::endl;
-    
-    HashTable hashTable(2);
-    hashTable.add("one", 1);
-    hashTable.add("two", 2);
-    hashTable.add("yes", 3);
-    
-    std::cout << "Get Values" <<std::endl;
-    std::cout << hashTable.get("yes") << std::endl;
-}
