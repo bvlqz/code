@@ -1,12 +1,9 @@
 
 CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
 
-add_library(Graphs INTERFACE)
+add_library(Graphs Graph.h Graph.cpp)
 
-target_include_directories(
-    Graphs
-    INTERFACE
-    ${CMAKE_CURRENT_SOURCE_DIR}
-)
 
 add_executable(GraphDemo demo.cpp)
+
+target_link_libraries(GraphDemo PRIVATE Graphs)
