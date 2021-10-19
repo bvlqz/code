@@ -116,13 +116,29 @@ Node `C` can reach:
 # Traversing a graph
 
 
-## Depht First Traversal
+## Depht First Traversal / Depht First Seach (DFS)
+`O(Vertices + Edges)`
 
 Following a path until you exhaust all the vertices in the graph (until you can go no further, then you backtrack untill you can continue).
 
 Recommended to use a Stack.
 
-## Breadth First Traversal
+**DFS can be used to:**
+* Compute a graph's minimun spanning tree
+* Detect and find cycles in a graph
+* Check if a graph is bipartite
+* Find strongly connected components
+* Topologically sort the nodes of a graph
+* Find bridges and articulation points
+* Find augmenting paths in a flow network
+* Generate mazes
+
+
+## Breadth First Traversal / Breadth First Search (BFS)
+`O(Vertices + Edges)`
+
 Start with the first vertex and tries to visit all the vertices as close to this vertex as possible.
+
+Useful when finding the shortest path on unweighted graphs
 
 Recommended to use a queue.
