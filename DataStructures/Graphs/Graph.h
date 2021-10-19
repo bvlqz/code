@@ -1,9 +1,13 @@
+#ifndef GRAPH_H
+#define GRAPH_H
+
 #include <vector>
 #include <string>
 #include <iostream>
 #include <map>
 
-
+#include "Edge.h"
+#include "Node.h"
 
 /*
 A graph
@@ -20,30 +24,49 @@ Code
 2021-07-10
 */
 
-struct Edge {
-    bool exists;
-    int weight;
-    // direction?
-};
-
-struct Node {
-    int data;
-};
-
 class Graph {
 
 public:
     Graph();
+    ~Graph();
 
-    void checkConnectivity(); // Union find data structure,BFS, DFS
+    // Does there exist a path between node A and node B
+    void checkConnectivity(std::string a, std::string b); // Union find data structure, BFS, DFS
+
+    // Does the weighted diagraph have any negative cicles? 
     void checkNegativeCicles(); // Bellman-Ford, Floyd-Warshall
+
+    // Self contained cicles within a directed graph, SCCs 
     void checkStronglyConnectedComponents(); // Tarjan's, Kosaraju's
+
+    // Given a list of cicties and the distances between each pair of cities
+    // What is the shortest possible route that visits each city exactly once
+    // and returns to the origin city? 
     void travelingSalesman(); // Held-Karp, branch and bound, etc.
+    
+    // Edges in a graph whose removal increases the number of connected components
+    // Hints weak points, bottlenecks or vulnerabilities
+    // AKA Bridges
+    void findCutEdges();
+
+    // Node in a graph whose removal increases the number of connected components
+    // AKA Articulation Points
+    void findCutVertices();
+
+    // Is a subset of the edges of a connected, edge-weighted graph that connects
+    // al the vertices together, without any cicles and with the minimun possible 
+    // total edge weight
     void minimunSpanningTree(); // (MST) Kruskal's, Prim's, Borůvka's
+
+    // With an infinite input source how much "flow" can we push through the network
     void maxFlow(); // (Flow networks) Ford-Fulkerson, Edmonds-Karp, Dinic's algoritm
-    void shortestPath(); // BFS (unweughted path), Dijkstra's, Bellman-Ford, Floyd-Warshall, A*, etc.
+
+    // Find the shortest path of edges from node A to node B
+    void shortestPath(); // BFS (unweighted graph), Dijkstra's, Bellman-Ford, Floyd-Warshall, A*, etc.
     
     
+    
+    void breadthFirstSearch(std::string at); // BFS
     void dephtFirstSearch(std::string at); // DFS
 
     void addNode(std::string name, int data);
@@ -55,6 +78,11 @@ public:
 
 private:
     std::vector<std::string> nodeNames;
+    
+    std::vector<Node*> nodes;
+    std::map<std::string, Node*> nodeLocator;
+    
+    
     int nodeCount;
     
     static std::vector<bool> tempDFSVisited;
@@ -71,7 +99,13 @@ private:
     std::map< std::string, std::vector< std::pair< std::string, int > > > adjacencyList;
     
     
-    
+    // Used by Depht First Search
     std::map< std::string, bool > visitedMap;
+    int groupCount;
+    
+    // Queue for Breadth First Search
+    
+    
 };
 
+#endif // GRAPH_H

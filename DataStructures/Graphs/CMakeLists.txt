@@ -1,7 +1,14 @@
 
 CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
 
-add_library(Graphs Graph.h Graph.cpp)
+add_library(
+    Graphs
+    Graph.h
+    Graph.cpp
+    Node.h
+    Node.cpp
+    Edge.h
+    Edge.cpp)
 
 
 add_executable(GraphDemo demo.cpp)

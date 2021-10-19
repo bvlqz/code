@@ -22,9 +22,14 @@ int main()
     G->addEgde("C", "B", 1);
     G->addEgde("C", "D", 2);
     
+    std::cout << std::endl << "printAdjacencyList()" << std::endl;
     G->printAdjacencyList();
     
+    std::cout << std::endl << "dephtFirstSearch()" << std::endl;
     G->dephtFirstSearch("A");
+    
+    std::cout << std::endl << "breadthFirstSearch()" << std::endl;
+    G->breadthFirstSearch("A");
     
     
     delete G;

@@ -9,22 +9,36 @@ Graph::Graph()
         
 }
 
+Graph::~Graph(){
+    // Iterate over Node pointers and delete them
+}
+
+
+// Breadth First Search
+// Mantains a queue on wich node it should visit next
+void Graph::breadthFirstSearch(std::string at)
+{
+
+}
+
+
+
+// Recursive Depht First Search
 void Graph::dephtFirstSearch(std::string at)
 {
+    
     // Skip if already exists
     if (!(visitedMap.find(at) == visitedMap.end())) return;
     
     visitedMap.insert( std::pair<std::string, bool>( at , true));
     
-    std::cout << "Visited ";
+    std::cout << "Visited Node(s): ";
     for (auto const& visited : visitedMap)
     {
         std::cout << visited.first << " ";
     }
     std::cout << std::endl;
-    
-    std::cout << "IN: " << at << std::endl;
-    
+        
     for (auto const& neighbours : adjacencyList)
     {
         for (auto const& neighbour : neighbours.second)
@@ -45,6 +59,13 @@ void Graph::addNode(std::string name, int data)
     nodeCount++;
     nodeNames.push_back(name);
     
+    
+    // Using node pointers
+    Node * n = new Node(name, data);
+    nodes.push_back(n);
+    
+    std::pair<std::string, Node*> nn (name, n);
+    nodeLocator.insert(nn);
 }
 
 void Graph::addEgde(std::string a, std::string b, int weight)
@@ -66,6 +87,17 @@ void Graph::addEgde(std::string a, std::string b, int weight)
     
     std::pair<std::string, int> p = std::make_pair(b, weight);
     aKey->second.push_back(p);
+    
+    
+    // Using node pointers
+    auto aNode = nodeLocator.find(a);
+    auto bNode = nodeLocator.find(b);
+    if (aNode == nodeLocator.end() || bNode == nodeLocator.end())
+    {
+        std::cout << "Node not found";
+        return;
+    }
+    aNode->second->addEdge(bNode->second, weight);
 }
     
 
