@@ -95,9 +95,9 @@ void Graph::addNode(std::string name, int data)
  */
 
 void Graph::printAdjacencyMatrix() {}
-    
+
 void Graph::printAdjacencyList()
-    {
+{
     for (auto const& node : nodes)
     {
         std::vector<Edge*> neighbors;
@@ -109,7 +109,7 @@ void Graph::printAdjacencyList()
             << ") "
             << node->getName()
             << " ->\t [" ;
-
+        
         
         for (auto & neighbor : neighbors)
         {
@@ -127,18 +127,12 @@ void Graph::printAdjacencyList()
     }
 }
 
-void Graph::printAdjacencyList()
+Node* Graph::getNode(std::string name)
 {
-    for (auto const& edgesList : adjacencyList)
-    {
-        std::cout << "(" << edgesList.second.size() << ")\t" ;
-        std::cout << edgesList.first << " ->\t [" ;
+    return nodeLocator.find(name)->second;
+}
 
-        for (auto & edge : edgesList.second)
-        {
-            std::cout << "(" << edge.first << ", " << edge.second << "),";
-        }
-        
-        std::cout << "]" << std::endl;
-    }
+void Graph::getNodes(std::vector<Node*>& n)
+{
+    n = nodes;
 }

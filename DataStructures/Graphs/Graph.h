@@ -70,7 +70,9 @@ public:
     void dephtFirstSearch(std::string at); // DFS
 
     void addNode(std::string name, int data);
-
+    Node* getNode(std::string name);
+    void getNodes(std::vector<Node*>& n);
+    
     void printAdjacencyMatrix();
     void printAdjacencyList();
     
