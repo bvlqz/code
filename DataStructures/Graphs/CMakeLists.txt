@@ -8,7 +8,9 @@ add_library(
     Node.h
     Node.cpp
     Edge.h
-    Edge.cpp)
+    Edge.cpp
+    Dijkstra.h
+    Dijkstra.cpp)
 
 
 add_executable(GraphDemo demo.cpp)
