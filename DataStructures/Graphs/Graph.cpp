@@ -24,10 +24,11 @@ void Graph::breadthFirstSearch(std::string at)
 
 
 // Recursive Depht First Search
+/*
 void Graph::dephtFirstSearch(std::string at)
 {
     
-    // Skip if already exists
+    // Skip if already visited
     if (!(visitedMap.find(at) == visitedMap.end())) return;
     
     visitedMap.insert( std::pair<std::string, bool>( at , true));
@@ -47,6 +48,7 @@ void Graph::dephtFirstSearch(std::string at)
         }
     }
 }
+ */
 
 void Graph::addNode(std::string name, int data)
 {

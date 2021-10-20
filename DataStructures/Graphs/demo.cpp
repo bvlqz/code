@@ -26,11 +26,11 @@ int main()
     G->printAdjacencyList();
     
     std::cout << std::endl << "dephtFirstSearch()" << std::endl;
-    G->dephtFirstSearch("A");
+    // G->dephtFirstSearch("A");
     
     std::cout << std::endl << "breadthFirstSearch()" << std::endl;
     G->breadthFirstSearch("A");
-    
+    */
     
     delete G;
 }
