@@ -79,8 +79,6 @@ public:
     void addEgde(std::string a, std::string b, int weight, bool undirected=true);
 
 private:
-    std::vector<std::string> nodeNames;
-    
     std::vector<Node*> nodes;
     std::map<std::string, Node*> nodeLocator;
     
@@ -98,7 +96,6 @@ private:
     // Efficient when iterating all the edges
     // std::map<std::string, int> adjacencyList;
     
-    std::map< std::string, std::vector< std::pair< std::string, int > > > adjacencyList;
     
     
     // Used by Depht First Search

@@ -52,14 +52,7 @@ void Graph::dephtFirstSearch(std::string at)
 
 void Graph::addNode(std::string name, int data)
 {
-    // Skip if node alredy exists
-    if (!(adjacencyList.find(name) == adjacencyList.end())) return;
-    
-    std::pair<std::string, int> l(name, 0);
-    adjacencyList.insert(l);
-    
-    nodeCount++;
-    nodeNames.push_back(name);
+    if (!(nodeLocator.find(name) == nodeLocator.end())) return;
     
     
     // Using node pointers
@@ -109,16 +102,34 @@ void Graph::printAdjacencyMatrix()
     }
     std::cout << std::endl;
     
-    for (int i = 0; i < adjacencyMatrix.size(); i++)
+void Graph::printAdjacencyList()
     {
+    for (auto const& node : nodes)
+    {
+        std::vector<Edge*> neighbors;
+        node->getNeighbors(neighbors);
         
-        std::cout << nodeNames[i] << " ";
+        std::cout
+            << "("
+            << neighbors.size()
+            << ") "
+            << node->getName()
+            << " ->\t [" ;
 
-        for (int j = 0; j < adjacencyMatrix[i].size(); j++)
+        
+        for (auto & neighbor : neighbors)
         {
-            std::cout << adjacencyMatrix[i][j] << " ";
+            std::cout
+                << "("
+                <<neighbor->getEndNode()->getName()
+                << ", "
+                << neighbor->getWeight()
+                << ")";
+
+            if (neighbor == neighbors.back()) continue;
+            std::cout << ", ";
         }
-        std::cout << std::endl;
+        std::cout << "]" << std::endl;
     }
 }
 
