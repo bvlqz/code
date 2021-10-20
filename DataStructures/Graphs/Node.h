@@ -15,6 +15,9 @@ public:
     void addEdge(Node * node, int weight);
     void addNeighbor(Node * node, int weight);
     
+    void getNeighbors(std::vector<Edge*>& n);
+    std::string getName();
+    
 private:
     static unsigned int count; 
     

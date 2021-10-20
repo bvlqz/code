@@ -20,11 +20,7 @@ Node::Node(std::string s, int d)
 }
 
 
-void Node::addNeighbor(Node * node, int weight)
-{
-    addEdge(node, weight);
-}
-
+void Node::addNeighbor(Node * node, int weight) { addEdge(node, weight); }
 void Node::addEdge(Node * node, int weight)
 {
     Edge* e = new Edge(this, node, weight);
@@ -40,3 +36,6 @@ void Node::addEdge(Node * node, int weight)
     
     neighbors.push_back(e);
 }
+
+std::string Node::getName() { return name; }
+void Node::getNeighbors(std::vector<Edge*>& n) { n = neighbors; }
