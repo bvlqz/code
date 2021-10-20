@@ -94,13 +94,7 @@ void Graph::addNode(std::string name, int data)
 }
  */
 
-void Graph::printAdjacencyMatrix()
-{
-    std::cout << std::endl << " ";
-    for (auto & nodeName : nodeNames) {
-        std::cout << " " << nodeName;
-    }
-    std::cout << std::endl;
+void Graph::printAdjacencyMatrix() {}
     
 void Graph::printAdjacencyList()
     {
