@@ -74,7 +74,9 @@ public:
     void printAdjacencyMatrix();
     void printAdjacencyList();
     
-    void addEgde(std::string a, std::string b, int weight);
+    
+    
+    void addEgde(std::string a, std::string b, int weight, bool undirected=true);
 
 private:
     std::vector<std::string> nodeNames;

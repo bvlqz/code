@@ -68,28 +68,8 @@ void Graph::addNode(std::string name, int data)
     nodeLocator.insert(nn);
 }
 
-void Graph::addEgde(std::string a, std::string b, int weight)
+void Graph::addEgde(std::string a, std::string b, int weight, bool undirected)
 {
-    auto aKey = adjacencyList.find(a);
-    auto bKey = adjacencyList.find(b);
-    
-    if (aKey == adjacencyList.end())
-    {
-        std::cout << "Node " << a << " was not found";
-        return;
-    }
-    
-    if (bKey == adjacencyList.end())
-    {
-        std::cout << "Node " << b << " was not found";
-        return;
-    }
-    
-    std::pair<std::string, int> p = std::make_pair(b, weight);
-    aKey->second.push_back(p);
-    
-    
-    // Using node pointers
     auto aNode = nodeLocator.find(a);
     auto bNode = nodeLocator.find(b);
     if (aNode == nodeLocator.end() || bNode == nodeLocator.end())
@@ -98,6 +78,7 @@ void Graph::addEgde(std::string a, std::string b, int weight)
         return;
     }
     aNode->second->addEdge(bNode->second, weight);
+    if (undirected) bNode->second->addEdge(aNode->second, weight);
 }
     
 
