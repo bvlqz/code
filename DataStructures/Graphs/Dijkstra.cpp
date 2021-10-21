@@ -20,34 +20,45 @@ void Dijkstra::setStartingNode(Node* n)
     startingNode = n;
 }
 
+
+
 void Dijkstra::solve()
 {
+    info.find(this->startingNode->getName())->second->shortestDistanceFromNode = 0;
+    solve(this->startingNode);
     
-    // Examine unvisited neighbors on starting node
+}
+
+void Dijkstra::solve(Node* n)
+{
     std::vector<Edge*> neighbors;
-    startingNode->getNeighbors(neighbors);
+    n->getNeighbors(neighbors);
+    
+    NodeInfo* currentNode = info.find(n->getName())->second;
+    
+    int minDist = std::numeric_limits<int>::max();
+    Node* nextNode = nullptr;
     
     for (auto const& neighbor : neighbors)
     {
-        auto neighborInfo = info.find(neighbor->getEndNode()->getName())->second;
+        NodeInfo* neighborNode = info.find(neighbor->getEndNode()->getName())->second;
+        if (neighborNode->visited) continue;
         
-        NodeInfo* startingNodeInfo = info.find(startingNode->getName())->second;
         
-        if (neighborInfo->visited) continue;
+        int dist = currentNode->shortestDistanceFromNode + neighbor->getWeight();
         
-        // shortest distance from selected node + weight
-        int distanceToNode = neighbor->getWeight() + startingNodeInfo->shortestDistanceFromNode;
-
-        if (distanceToNode < neighborInfo->shortestDistanceFromNode)
+        if (dist < neighborNode->shortestDistanceFromNode)
         {
-            neighborInfo->shortestDistanceFromNode = distanceToNode;
-            neighborInfo->prevVertex = neighbor->getStartNode();
+            neighborNode->shortestDistanceFromNode = dist;
+            neighborNode->prevVertex = n;
+            
+            if (dist < minDist) nextNode = neighbor->getEndNode();
         }
+
     }
-    
     printTable();
-    
-    solved = true;
+    currentNode->visited = true;
+    if (nextNode != nullptr) solve(nextNode);
 }
 
 void Dijkstra::printTable()

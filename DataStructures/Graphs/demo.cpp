@@ -13,6 +13,7 @@ int main()
     G->addNode("C", 2);
     G->addNode("D", 3);
     G->addNode("E", 4);
+    G->addNode("F", 4);
 
     G->addEgde("A", "B", 6, true);
     G->addEgde("A", "D", 1, true);
@@ -26,16 +27,6 @@ int main()
     d->setStartingNode(G->getNode("A"));
     d->printTable();
     d->solve();
-    /*
-    std::cout << std::endl << "printAdjacencyList()" << std::endl;
-    G->printAdjacencyList();
-    
-    std::cout << std::endl << "dephtFirstSearch()" << std::endl;
-    // G->dephtFirstSearch("A");
-    
-    std::cout << std::endl << "breadthFirstSearch()" << std::endl;
-    G->breadthFirstSearch("A");
-    */
     
     delete G;
 }

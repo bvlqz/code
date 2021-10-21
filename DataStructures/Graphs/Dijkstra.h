@@ -12,12 +12,7 @@ struct NodeInfo
 {
     bool visited;
     int shortestDistanceFromNode;
-    int distanceFromStartVertex;
-    
     Node* prevVertex;
-    
-    //distance from start vertex
-    
     NodeInfo()
     {
         shortestDistanceFromNode = std::numeric_limits<int>::max();
@@ -31,13 +26,14 @@ class Dijkstra
 public:
     Dijkstra(Graph* g);
     void setStartingNode(Node* n);
+    
     void solve();
+    void solve(Node* n);
+    
     void shortestPath(Node* n);
     void printTable();
     
 private:
-    bool solved;
-    
     Node* startingNode;
     std::map<std::string, NodeInfo*> info;
 };
