@@ -1,0 +1,2 @@
+language = "bash"
+run = "mkdir -p Build && cd Build && cmake .. && make && ./DataStructures/Graphs/GraphDemo"
