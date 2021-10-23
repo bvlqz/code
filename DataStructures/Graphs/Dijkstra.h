@@ -11,12 +11,16 @@
 struct NodeInfo
 {
     bool visited;
-    int shortestDistanceFromNode;
-    Node* prevVertex;
+    
+    // Shortest known distance
+    int distance;
+    
+    // Previous node
+    Node* previous;
     NodeInfo()
     {
-        shortestDistanceFromNode = std::numeric_limits<int>::max();
-        prevVertex = nullptr;
+        distance = std::numeric_limits<int>::max();
+        previous = nullptr;
         visited = false;
     }
 };
@@ -24,16 +28,17 @@ struct NodeInfo
 class Dijkstra
 {
 public:
-    Dijkstra(Graph* g);
-    void setStartingNode(Node* n);
+    Dijkstra(Graph* g, Node* n);
+    ~Dijkstra();
     
     void solve();
-    void solve(Node* n);
     
-    void shortestPath(Node* n);
     void printTable();
+    void printShortestPath(Node* n);
     
 private:
+    void solve(Node* n);
+    
     Node* startingNode;
     std::map<std::string, NodeInfo*> info;
 };
