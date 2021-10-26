@@ -7,6 +7,33 @@
 
 using namespace std;
 
+void printAdjacencyList(std::vector<std::vector<std::pair<int, int> > > adj)
+{
+    
+  int idx = 0;
+  std::cout << std::endl << "Adjacency List" << std::endl;
+  for (auto& node : adj)
+  {
+    std::cout << idx << "(" << idx + 1 << ") -> ";
+    for (auto& neighbor : node)
+    {
+      std::cout << "(" << neighbor.first << ", " << neighbor.second << ")";
+    }
+    std::cout << std::endl;
+    idx++;
+  }
+  std::cout << std::endl;
+}
+
+void printPQ(std::priority_queue<pair<int, int>, vector<pair<int, int> >, std::greater<pair<int, int> > > pq)
+{
+    while(!pq.empty()) {
+        std::cout << "(" << pq.top().first << ',' << pq.top().second << ")";
+        pq.pop();
+    }
+    std::cout << '\n';
+}
+
 class Solution {
 private:
     std::vector<int> dijkstra(std::vector<std::vector<std::pair<int, int> > > graph, int nodes, int start)
