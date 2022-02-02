@@ -5,5 +5,5 @@ set(CMAKE_CXX_STANDARD 11)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 add_subdirectory(DataStructures)
-add_subdirectory(Problems/LeetCode)
+add_subdirectory(Problems/LeetCode/cpp)
 
